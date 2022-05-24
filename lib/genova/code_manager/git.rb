@@ -62,16 +62,13 @@ module Genova
 
         if @branch.present?
           checkout = @branch
-          reset_hard = "origin/#{@branch}"
         else
           checkout = "refs/tags/#{@tag}"
-          reset_hard = "refs/tags/#{@tag}"
         end
 
         git.fetch
         git.clean(force: true, d: true)
         git.checkout(checkout)
-        git.reset_hard(reset_hard)
 
         git.log(1).to_s
       end
